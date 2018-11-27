@@ -53,7 +53,6 @@
                         <li><a runat="server" href="~/">Home</a></li>
                         <li><a runat="server" href="~/About">About</a></li>
                         <li><a runat="server" href="~/Contact">Contact</a></li>
-                        <li><a id="ProIcon" runat="server" href="ProductDetails">ProductDetails</a></li>
                     </ul>
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
                         <AnonymousTemplate>
@@ -63,6 +62,7 @@
                             </ul>
                         </AnonymousTemplate>
                         <LoggedInTemplate>
+                            <authorization>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a runat="server" href="~/Account/Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()%> !</a></li>
                                                                                                                          
@@ -70,9 +70,56 @@
                                     <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
                                 </li>
                             </ul>
+                            
+<%--        <allow user="Akshaya@gmail.com"/>
+        <li>
+            <a runat ="server" href="~/ProductDetails.aspx">Product Details</a>
+        </li>
+        <allow roles="ProductManger"/>
+        <deny roles=”SalesManger”/>
 
+        </authorization>--%>
+<%--                                <location path="ProductDetails.aspx">
+  <system.web>
+    <authorization>
+      <allow roles="ProductManger" />--%>
+<%--                                <siteMapNode title="Manager" roles="ProductManger">
+                                    <siteMapNode url="~/ProductDetails.aspx" title="Product Details" />
+                                    </siteMapNode>--%>
+<%--                <li>
+            <a runat ="server" href="~/ProductDetails.aspx">Product Details</a>
+        </li>--%>
+<%--      <deny users="" />
+    </authorization>
+  </system.web>
+</location>--%>
                         </LoggedInTemplate>
+                        <RoleGroups>
+                            <asp:RoleGroup Roles="Admin,ProductManger">
+                                <ContentTemplate>
+                                <ul class="nav navbar-nav navbar-right">
+                                                                    <li><a runat="server" href="~/Account/Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()%> !</a></li>
 
+                                                                                                                         
+                                <li>
+                                    <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
+                                </li>
+                                    <li>
+                                        <a runat ="server" href="~/ProductDetails.aspx">Product Details</a>
+                                    </li>
+                            </ul>
+                                    </ContentTemplate>
+                            </asp:RoleGroup>
+                        </RoleGroups>
+
+<%--                        <%: 
+                            if(Context.User.Identity.GetUserRole()=="ProductManger")
+                            {
+                                <li>
+                                        <a runat ="server" href="~/ProductDetails.aspx">Product Details</a>
+                                    </li>
+                            }
+                            %>--%>
                     </asp:LoginView>
                 </div>
             </div>
