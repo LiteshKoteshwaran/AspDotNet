@@ -100,3 +100,5 @@ D:\New folder\26Nov\26Nov\obj\Debug\27Nov.csproj.CoreCompileInputs.cache
 D:\New folder\26Nov\26Nov\obj\Debug\27Nov.csproj.CopyComplete
 D:\New folder\26Nov\26Nov\obj\Debug\26Nov.dll
 D:\New folder\26Nov\26Nov\obj\Debug\26Nov.pdb
+C:\Users\litesh.koteshwaran\Documents\GitHub\Asp.Net\Practice\28Nov\28Nov\obj\Debug\26Nov.dll
+C:\Users\litesh.koteshwaran\Documents\GitHub\Asp.Net\Practice\28Nov\28Nov\obj\Debug\26Nov.pdb
