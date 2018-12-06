@@ -30,23 +30,40 @@ namespace Final
         public string RequestID { set; get; }
         public string TokenID { set; get; }
 
+
+        public string EmpDeptName { get; set; }
+        public string EmpMobile { get; set; }
+
+        public string SelectedSnacks { get; set; }
+        public string SnackQuantity { get; set; }
+        int Cost;
+
+
         ConnectionManger connectionManger = new ConnectionManger();
         bool Result ;
 
+        void calculate()
+        {
+            string str = "select Cost from Item where ItemName ='"+ FoodType+"'";
+            Cost = int.Parse(connectionManger.Select(str));
+            int Totalcost = CanteenRequestForm.TotalCount * Cost; 
+        }
         internal bool InsertionForGuest()
         {
-            string str = "insert into Guest values('" + GName + "','" + OrgName + "','" + MobileNo + "','" + TokenID + "','" + RequestID + "')" ; 
+            calculate();
+            string str = "insert into GuestDetails values('" + GName + "','" + OrgName + "','" + MobileNo + "','" + TokenID + "','" + RequestID + "')" ; 
             Result = connectionManger.ConnMan(str);
             return Result;
         }
         internal bool RequestForm()
         {
-            string str = "insert into RequestForm values('" + RequestID + "','" + EmpId  + "','" + DepartID + "','" + LocId + "','" + CanteenID + "','" + FoodType + "','" + OrderQuanty + "','" + FromDate + "','" + ToDate + "','" + AddDetails + "')";
+            string str = "insert into Request(RequestId,EmpId,DeptId,LocId,CanteenId,MealType,Quantity,FromDate,ToDate,AdditionDetails,Cost) values('" + RequestID + "','" + EmpId  + "','" + DepartID + "','" + LocId + "','" + CanteenID + "','" + FoodType + "','" + OrderQuanty + "','" + FromDate + "','" + ToDate + "','" + AddDetails + "','" + Cost + "')";
             return Result = connectionManger.ConnMan(str);
+            
         }
-        internal bool AdminIsApproved()
+        internal bool AdminIsApproved(string RequestID)
         {
-            string str = "update RequestForm set AdminIsApproved = false where RequestID = '"+RequestID +"'";
+            string str = "update Request set AdminVIPApproval = 0 where RequestId = '"+ RequestID + "'";
             return Result = connectionManger.ConnMan(str);
         }
     }
